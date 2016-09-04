@@ -1,0 +1,21 @@
+{
+  "name": "hydrogen-launcher",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-text-editor": [
+      "hydrogen-launcher:launch-terminal",
+      "hydrogen-launcher:launch-jupyter-console"
+    ]
+  },
+  "repository": "https://github.com/lgeiger/hydrogen-launcher",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

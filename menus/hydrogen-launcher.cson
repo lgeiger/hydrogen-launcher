@@ -1,0 +1,19 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'hydrogen-launcher'
+      'submenu': [
+        {
+          'label': 'Launch Terminal'
+          'command': 'hydrogen-launcher:launch-terminal'
+        },
+        {
+          'label': 'Launch Jupyter Console'
+          'command': 'hydrogen-launcher:launch-jupyter-console'
+        }
+      ]
+    ]
+  }
+]
