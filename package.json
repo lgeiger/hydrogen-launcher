@@ -11,19 +11,6 @@
     "jupyter",
     "ipython"
   ],
-  "activationCommands": {
-    "atom-text-editor": [
-      "hydrogen-launcher:launch-terminal",
-      "hydrogen:select-kernel",
-      "hydrogen:connect-to-remote-kernel",
-      "hydrogen:run",
-      "hydrogen:run-and-move-down",
-      "hydrogen:run-all",
-      "hydrogen:run-all-above",
-      "hydrogen:run-cell",
-      "hydrogen:run-cell-and-move-down"
-    ]
-  },
   "consumedServices": {
     "hydrogen.provider": {
       "versions": {

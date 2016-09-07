@@ -25,6 +25,10 @@ module.exports = HydrogenLauncher =
     deactivate: ->
         @subscriptions.dispose()
 
+    consumeHydrogen: (provider) ->
+        @setConnectionFile provider.connectionFile
+        new Disposable => @setConnectionFile null
+
     launchTerminal: ->
         term.launchTerminal '', @getCWD(), @getTerminal(), (err) ->
             if err
@@ -37,10 +41,6 @@ module.exports = HydrogenLauncher =
         term.launchJupyter @connectionFile(), @getCWD(), @getTerminal(), (err) ->
             if err
                 atom.notifications.addError err.message
-
-    consumeHydrogen: (provider) ->
-        @setConnectionFile provider.connectionFile
-        new Disposable => @setConnectionFile null
 
     setConnectionFile: (file) ->
         @connectionFile = file
