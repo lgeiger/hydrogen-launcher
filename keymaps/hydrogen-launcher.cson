@@ -8,9 +8,9 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 '.platform-win32 atom-text-editor, .platform-linux atom-text-editor':
-  'ctrl-shift-l': 'hydrogen-launcher:launch-terminal'
-  'ctrl-alt-l': 'hydrogen-launcher:launch-jupyter-console'
+  'ctrl-alt-k': 'hydrogen-launcher:launch-terminal'
+  'ctrl-alt-j': 'hydrogen-launcher:launch-jupyter-console'
 
 '.platform-darwin atom-text-editor':
-  'cmd-ctrl-l': 'hydrogen-launcher:launch-terminal'
-  'cmd-alt-l': 'hydrogen-launcher:launch-jupyter-console'
+  'cmd-alt-k': 'hydrogen-launcher:launch-terminal'
+  'cmd-alt-j': 'hydrogen-launcher:launch-jupyter-console'
