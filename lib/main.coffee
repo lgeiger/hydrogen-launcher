@@ -38,7 +38,12 @@ module.exports = HydrogenLauncher =
         unless @connectionFile
             atom.notifications.addError 'Hydrogen `v0.15.0+` has to be running.'
             return
-        term.launchJupyter @connectionFile(), @getCWD(), @getTerminal(), (err) ->
+
+        connectionFile = @connectionFile()
+        unless connectionFile
+            return
+
+        term.launchJupyter connectionFile, @getCWD(), @getTerminal(), (err) ->
             if err
                 atom.notifications.addError err.message
 
