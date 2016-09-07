@@ -4,12 +4,32 @@
   "version": "0.0.0",
   "description": "A short description of your package",
   "keywords": [
+    "hydrogen",
+    "terminal",
+    "launch",
+    "console",
+    "jupyter",
+    "ipython"
   ],
   "activationCommands": {
     "atom-text-editor": [
       "hydrogen-launcher:launch-terminal",
-      "hydrogen-launcher:launch-jupyter-console"
+      "hydrogen:select-kernel",
+      "hydrogen:connect-to-remote-kernel",
+      "hydrogen:run",
+      "hydrogen:run-and-move-down",
+      "hydrogen:run-all",
+      "hydrogen:run-all-above",
+      "hydrogen:run-cell",
+      "hydrogen:run-cell-and-move-down"
     ]
+  },
+  "consumedServices": {
+    "hydrogen.provider": {
+      "versions": {
+        "^0.0.1": "consumeHydrogen"
+      }
+    }
   },
   "repository": "https://github.com/lgeiger/hydrogen-launcher",
   "license": "MIT",
@@ -17,5 +37,6 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+    "term-launcher": "^0.1.0"
   }
 }

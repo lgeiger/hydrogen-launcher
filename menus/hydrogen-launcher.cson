@@ -3,7 +3,7 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'hydrogen-launcher'
+      'label': 'Hydrogen Launcher'
       'submenu': [
         {
           'label': 'Launch Terminal'

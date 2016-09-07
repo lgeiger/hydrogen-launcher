@@ -1,13 +1,19 @@
 # coffeelint: disable = missing_fat_arrows
-{CompositeDisposable} = require 'atom'
+term = require 'term-launcher'
+path = require 'path'
+{CompositeDisposable, Disposable} = require 'atom'
 
 
 module.exports = HydrogenLauncher =
     config:
         app:
+            title: 'Terminal application'
+            description: 'This will depend on your operation system.'
             type: 'string'
-            default: 'Terminal.app'
+            default: term.getDefaultTerminal()
+
     subscriptions: null
+    connectionFile: null
 
     activate: (state) ->
         @subscriptions = new CompositeDisposable
@@ -20,7 +26,29 @@ module.exports = HydrogenLauncher =
         @subscriptions.dispose()
 
     launchTerminal: ->
-        console.log 'launchTerminal'
+        term.launchTerminal '', @getCWD(), @getTerminal(), (err) ->
+            if err
+                atom.notifications.addError err.message
 
     launchJupyter: ->
-        console.log 'launchJupyter'
+        unless @connectionFile
+            atom.notifications.addError 'Hydrogen `v0.15.0+` has to be running.'
+            return
+        term.launchJupyter @connectionFile(), @getCWD(), @getTerminal(), (err) ->
+            if err
+                atom.notifications.addError err.message
+
+    consumeHydrogen: (provider) ->
+        @setConnectionFile provider.connectionFile
+        new Disposable => @setConnectionFile null
+
+    setConnectionFile: (file) ->
+        @connectionFile = file
+
+    getTerminal: ->
+        return atom.config.get 'hydrogen-launcher.app'
+
+    getCWD: ->
+        dir = atom.project.rootDirectories[0]?.path or
+            path.dirname atom.workspace.getActiveTextEditor().getPath()
+        return dir
