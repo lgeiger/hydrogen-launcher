@@ -21,6 +21,8 @@ module.exports = HydrogenLauncher =
         @subscriptions.add atom.commands.add 'atom-text-editor',
             'hydrogen-launcher:launch-terminal': => @launchTerminal()
             'hydrogen-launcher:launch-jupyter-console': => @launchJupyter()
+            'hydrogen-launcher:copy-path-to-connection-file': =>
+                @copyPathToConnectionFile()
 
     deactivate: ->
         @subscriptions.dispose()
@@ -35,11 +37,7 @@ module.exports = HydrogenLauncher =
                 atom.notifications.addError err.message
 
     launchJupyter: ->
-        unless @connectionFile
-            atom.notifications.addError 'Hydrogen `v0.15.0+` has to be running.'
-            return
-
-        connectionFile = @connectionFile()
+        connectionFile = @getConnectionFile()
         unless connectionFile
             return
 
@@ -47,8 +45,25 @@ module.exports = HydrogenLauncher =
             if err
                 atom.notifications.addError err.message
 
+    copyPathToConnectionFile: ->
+        connectionFile = @getConnectionFile()
+        unless connectionFile
+            return
+
+        atom.clipboard.write connectionFile
+        message = 'Path to connection file copied to clipboard.'
+        description = "Use `jupyter console --existing #{connectionFile}` to
+            connect to the running kernel."
+        atom.notifications.addSuccess message, description: description
+
     setConnectionFile: (file) ->
         @connectionFile = file
+
+    getConnectionFile: ->
+        unless @connectionFile
+            atom.notifications.addError 'Hydrogen `v0.15.0+` has to be running.'
+            return
+        return @connectionFile()
 
     getTerminal: ->
         return atom.config.get 'hydrogen-launcher.app'
