@@ -11,6 +11,13 @@ module.exports = HydrogenLauncher =
             description: 'This will depend on your operation system.'
             type: 'string'
             default: term.getDefaultTerminal()
+        console:
+            title: 'Jupyter console'
+            description: 'Change this if you want to start a `qtconsole` or any
+            other jupyter interface that can be started with `jupyter
+            <your-console> --existing <connection-file>`.'
+            type: 'string'
+            default: 'console'
 
     subscriptions: null
     connectionFile: null
@@ -40,10 +47,11 @@ module.exports = HydrogenLauncher =
         connectionFile = @getConnectionFile()
         unless connectionFile
             return
-
-        term.launchJupyter connectionFile, @getCWD(), @getTerminal(), (err) ->
-            if err
-                atom.notifications.addError err.message
+        jpConsole = atom.config.get 'hydrogen-launcher.console'
+        term.launchJupyter connectionFile, @getCWD(), jpConsole, @getTerminal(),
+            (err) ->
+                if err
+                    atom.notifications.addError err.message
 
     copyPathToConnectionFile: ->
         connectionFile = @getConnectionFile()
