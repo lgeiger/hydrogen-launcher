@@ -18,6 +18,13 @@ module.exports = HydrogenLauncher =
             <your-console> --existing <connection-file>`.'
             type: 'string'
             default: 'console'
+        command:
+            title: 'Custom command'
+            description: 'This command will be excuted in the launched terminal.
+            You can access the connection file from Hydrogen by using
+            `{connection-file}` within your command'
+            type: 'string'
+            default: ''
 
     subscriptions: null
     connectionFile: null
@@ -28,6 +35,8 @@ module.exports = HydrogenLauncher =
         @subscriptions.add atom.commands.add 'atom-text-editor',
             'hydrogen-launcher:launch-terminal': => @launchTerminal()
             'hydrogen-launcher:launch-jupyter-console': => @launchJupyter()
+            'hydrogen-launcher:launch-terminal-command': =>
+                @launchTerminal(true)
             'hydrogen-launcher:copy-path-to-connection-file': =>
                 @copyPathToConnectionFile()
 
@@ -38,8 +47,10 @@ module.exports = HydrogenLauncher =
         @setConnectionFile provider.connectionFile
         new Disposable => @setConnectionFile null
 
-    launchTerminal: ->
-        term.launchTerminal '', @getCWD(), @getTerminal(), (err) ->
+    launchTerminal: (command = false) ->
+        if command
+            cmd = @getCommand()
+        term.launchTerminal cmd, @getCWD(), @getTerminal(), (err) ->
             if err
                 atom.notifications.addError err.message
 
@@ -72,6 +83,18 @@ module.exports = HydrogenLauncher =
             atom.notifications.addError 'Hydrogen `v0.15.0+` has to be running.'
             return
         return @connectionFile()
+
+    getCommand: ->
+        cmd = atom.config.get 'hydrogen-launcher.command'
+        if cmd is ''
+            atom.notifications.addError 'No custom command set.'
+            return
+        if cmd.indexOf('{connection-file}') > -1
+            connectionFile = @getConnectionFile()
+            unless connectionFile?
+                return
+            cmd = cmd.replace '{connection-file}', connectionFile
+        return cmd
 
     getTerminal: ->
         return atom.config.get 'hydrogen-launcher.app'
