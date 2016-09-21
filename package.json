@@ -14,7 +14,7 @@
   "consumedServices": {
     "hydrogen.provider": {
       "versions": {
-        "^0.0.1": "consumeHydrogen"
+        "^0.0.2": "consumeHydrogen"
       }
     }
   },

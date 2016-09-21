@@ -27,7 +27,7 @@ module.exports = HydrogenLauncher =
             default: ''
 
     subscriptions: null
-    connectionFile: null
+    hydrogen: null
 
     activate: (state) ->
         @subscriptions = new CompositeDisposable
@@ -43,9 +43,8 @@ module.exports = HydrogenLauncher =
     deactivate: ->
         @subscriptions.dispose()
 
-    consumeHydrogen: (provider) ->
-        @setConnectionFile provider.connectionFile
-        new Disposable => @setConnectionFile null
+    consumeHydrogen: (@hydrogen) ->
+        new Disposable => @hydrogen = null
 
     launchTerminal: (command = false) ->
         if command
@@ -75,14 +74,15 @@ module.exports = HydrogenLauncher =
             connect to the running kernel."
         atom.notifications.addSuccess message, description: description
 
-    setConnectionFile: (file) ->
-        @connectionFile = file
-
     getConnectionFile: ->
-        unless @connectionFile
+        unless @hydrogen
             atom.notifications.addError 'Hydrogen `v0.15.0+` has to be running.'
             return
-        return @connectionFile()
+        unless @hydrogen.getActiveKernel()
+            language = atom.workspace.getActiveTextEditor().getGrammar()?.name
+            atom.notifications.addError "No running kernel for language `#{language}` found."
+            return
+        return @hydrogen.getActiveKernel().getConnectionFile()
 
     getCommand: ->
         cmd = atom.config.get 'hydrogen-launcher.command'
