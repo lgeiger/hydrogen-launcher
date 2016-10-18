@@ -2,7 +2,7 @@
   "name": "hydrogen-launcher",
   "main": "./lib/main",
   "version": "1.0.0",
-  "description": "A short description of your package",
+  "description": "Launch terminals and jupyter consoles connected to hydrogen",
   "keywords": [
     "hydrogen",
     "terminal",
