@@ -76,7 +76,7 @@ module.exports = HydrogenLauncher =
 
     getConnectionFile: ->
         unless @hydrogen
-            atom.notifications.addError 'Hydrogen `v0.15.0+` has to be running.'
+            atom.notifications.addError 'Hydrogen `v1.0.0+` has to be running.'
             return
         try
             return @hydrogen.getActiveKernel()?.getConnectionFile()
