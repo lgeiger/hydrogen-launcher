@@ -76,13 +76,13 @@ module.exports = HydrogenLauncher =
 
     getConnectionFile: ->
         unless @hydrogen
-            atom.notifications.addError 'Hydrogen `v0.15.0+` has to be running.'
+            atom.notifications.addError 'Hydrogen `v1.0.0+` has to be running.'
             return
-        unless @hydrogen.getActiveKernel()
-            language = atom.workspace.getActiveTextEditor().getGrammar()?.name
-            atom.notifications.addError "No running kernel for language `#{language}` found."
-            return
-        return @hydrogen.getActiveKernel().getConnectionFile()
+        try
+            return @hydrogen.getActiveKernel()?.getConnectionFile()
+        catch error
+            atom.notifications.addError error.message
+        return null
 
     getCommand: ->
         cmd = atom.config.get 'hydrogen-launcher.command'
