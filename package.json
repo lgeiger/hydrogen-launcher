@@ -28,7 +28,7 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "term-launcher": "^0.2.2"
+    "term-launcher": "^0.2.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",
