@@ -16,6 +16,12 @@
       "versions": {
         "^1.0.0": "consumeHydrogen"
       }
+    },
+    "runInTerminal": {
+      "description": "Allow to run commands in platformio ide terminal.",
+      "versions": {
+        "^0.14.5": "consumePlatformIoTerminal"
+      }
     }
   },
   "scripts": {
@@ -28,7 +34,7 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "term-launcher": "^0.2.3"
+    "term-launcher": "^0.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",

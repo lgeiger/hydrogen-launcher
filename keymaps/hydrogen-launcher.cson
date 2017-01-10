@@ -10,7 +10,9 @@
 '.platform-win32 atom-text-editor, .platform-linux atom-text-editor':
   'ctrl-alt-k': 'hydrogen-launcher:launch-terminal'
   'ctrl-alt-j': 'hydrogen-launcher:launch-jupyter-console'
+  'ctrl-alt-shift-j': 'hydrogen-launcher:launch-jupyter-console-in-platformio-terminal'
 
 '.platform-darwin atom-text-editor':
   'cmd-alt-k': 'hydrogen-launcher:launch-terminal'
   'cmd-alt-j': 'hydrogen-launcher:launch-jupyter-console'
+  'cmd-alt-shift-j': 'hydrogen-launcher:launch-jupyter-console-in-platformio-terminal'
