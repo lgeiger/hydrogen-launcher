@@ -14,6 +14,10 @@
           'command': 'hydrogen-launcher:launch-jupyter-console'
         },
         {
+          'label': 'Launch Jupyter Console in PlatformIO Terminal'
+          'command': 'hydrogen-launcher:launch-jupyter-console-in-platformio-terminal'
+        },
+        {
           'label': 'Launch Terminal and Run Command'
           'command': 'hydrogen-launcher:launch-terminal-command'
         }
