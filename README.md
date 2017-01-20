@@ -1,5 +1,7 @@
 # :rocket: Hydrogen Launcher
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lgeiger/hydrogen-launcher.svg)](https://greenkeeper.io/)
+
 With Hydrogen Launcher you can open a terminal at the current working directory with a simple command.
 
 It is tested on linux, macOS and windows. You also can easily configure it to use your favorite terminal application.
